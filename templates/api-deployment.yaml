@@ -117,6 +117,8 @@ spec:
                   name: {{ .Release.Name }}-secrets
                   key: awsS3SecretAccessKey
             {{ end }}
+            - name: LAGO_AWS_S3_ENDPOINT
+              value: {{ .Values.global.s3.aws.endpoint | quote }}
             - name: LAGO_AWS_S3_BUCKET
               value: {{ .Values.global.s3.aws.bucket | quote }}
             - name: LAGO_AWS_S3_REGION
