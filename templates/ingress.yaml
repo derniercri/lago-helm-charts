@@ -4,8 +4,8 @@ kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
   annotations:
-{{ if .Values.global.ingress.annotations }}
-  {{- with .Values.ingress.annotations }}
+{{- if .Values.global.ingress.annotations -}}
+  {{- with .Values.global.ingress.annotations }}
     {{- toYaml . | trim | nindent 4 }}
   {{- end }}
 {{ end }}
