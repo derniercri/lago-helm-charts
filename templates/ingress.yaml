@@ -15,6 +15,7 @@ spec:
   - hosts:
     - {{ .Values.global.ingress.frontHostname }}
     secretName: {{ .Release.Name }}-ingress-secret
+  - hosts:
     - {{ .Values.global.ingress.apiHostname }}
     secretName: {{ .Release.Name }}-api-ingress-secret
   rules:
