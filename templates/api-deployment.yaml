@@ -154,6 +154,16 @@ spec:
           ports:
             - containerPort: 3000
               protocol: TCP
+          # start.sh exécute `rails db:migrate` avant de lancer Puma. Sans sonde, le
+          # Service route vers un pod encore en migration. Pas de livenessProbe : une
+          # migration longue ne doit jamais déclencher de redémarrage.
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 120
           resources:
             requests:
               memory: {{ .Values.api.resources.memory }}
